@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_day4/ProductDataModel.dart';
 import 'package:flutter/services.dart' as rootBundle;
+import 'dart:math';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  Profile({Key? key}) : super(key: key);
   static final List<Color> list = [
     Colors.green.shade200,
     Colors.yellow.shade200,
@@ -16,6 +17,7 @@ class Profile extends StatelessWidget {
     Colors.blue.shade200,
     Colors.brown.shade200,
   ];
+  final Random random = new Random();
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +41,26 @@ class Profile extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Expanded(
-                                flex: 15,
-                                child: Container(
+                              flex: 18,
+                              child: Container(
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.black,
+                                  radius: 65.0,
                                   child: CircleAvatar(
-                                    radius: 45,
-                                    backgroundImage: items[index].avatar == null
+                                    radius: 30,
+                                    backgroundImage: items[index].avatar != null
                                         ? NetworkImage(
                                             items[index].avatar.toString())
                                         : NetworkImage(
                                             "https://pic.onlinewebfonts.com/svg/img_550783.png"),
-                                    backgroundColor: Colors.yellow,
+                                    // backgroundColor: Colors.yellow,
+                                    backgroundColor: list[random.nextInt(8)],
                                   ),
-                                )),
+                                ),
+                              ),
+                            ),
                             Expanded(
-                              flex: 63,
+                              flex: 60,
                               child: Container(
                                 height: 100,
                                 padding: EdgeInsets.only(left: 5),
@@ -90,7 +98,7 @@ class Profile extends StatelessWidget {
                                     // Text(items[index].status.toString(),
                                     //     style: TextStyle(color: Colors.grey)),
                                     Text(
-                                        items[index].status == null
+                                        items[index].status != null
                                             ? items[index].status.toString()
                                             : "No status",
                                         style: TextStyle(color: Colors.grey)),
@@ -103,7 +111,7 @@ class Profile extends StatelessWidget {
                               child: Container(
                                 height: 100,
                                 padding: EdgeInsets.only(left: 5),
-                                alignment: Alignment.centerLeft,
+                                alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Colors.yellow)),
                                 child: Column(
@@ -111,17 +119,42 @@ class Profile extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Text(items[index].lastSeenTime.toString(),
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontWeight: FontWeight.w600)),
+                                    Text(
+                                      items[index].lastSeenTime.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                     SizedBox(height: 8),
                                     CircleAvatar(
-                                      radius: 22,
-                                      backgroundImage: NetworkImage(
-                                          'https://via.placeholder.com/150'),
-                                      backgroundColor: Colors.transparent,
-                                    )
+                                      backgroundColor:
+                                          items[index].messages != null
+                                              ? Colors.black
+                                              : Colors.grey.shade50,
+                                      radius: 25,
+                                      child: CircleAvatar(
+                                        radius: 22,
+                                        child: items[index].messages == null
+                                            ? null
+                                            : Text(
+                                                items[index].messages.toString(),
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                        backgroundColor:
+                                            items[index].messages == null
+                                                ? Colors.grey.shade50
+                                                : list[random.nextInt(8)],
+
+                                        // backgroundImage: NetworkImage(
+                                        //     'https://via.placeholder.com/150'),
+
+                                        // child: Text(items[index].id.toString()),
+                                        // backgroundColor: list[random.nextInt(8)],
+                                        // child: null,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

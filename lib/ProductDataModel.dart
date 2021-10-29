@@ -6,6 +6,7 @@ class ProductDataModel {
   String? lastSeenTime;
   String? avatar;
   String? status;
+  int? messages;
 
   ProductDataModel(
       {this.id,
@@ -14,7 +15,8 @@ class ProductDataModel {
       this.username,
       this.lastSeenTime,
       this.avatar,
-      this.status});
+      this.status,
+      this.messages});
 
   ProductDataModel.fromJSON(Map<String, dynamic> json) {
     id = json["id"];
@@ -24,6 +26,6 @@ class ProductDataModel {
     lastSeenTime = json["last_seen_time"];
     avatar = json["avatar"];
     status = json["status"];
-
+    messages = json["messages"];
   }
 }

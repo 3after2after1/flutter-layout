@@ -45,7 +45,7 @@ class Profile extends StatelessWidget {
                               child: Container(
                                 child: CircleAvatar(
                                   backgroundColor: Colors.black,
-                                  radius: 65.0,
+                                  radius: 60.0,
                                   child: CircleAvatar(
                                     radius: 30,
                                     backgroundImage: items[index].avatar != null
